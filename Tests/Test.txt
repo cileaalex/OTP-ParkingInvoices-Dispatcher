@@ -1,0 +1,51 @@
+SC GAMAPROCONSULT SRL
+Sediu: AROMEI 26-28 , PARTER, APT 03,
+SECTOR 2, BUCURESTI
+CIF: RO 17293576
+Nr.Reg.Com: J40/3813/2005
+Cont: RO49OTPV113000708070 RO03
+Bancă: OTP BANK
+Cont: RO60OTPV113000708070 EU01
+Bancă: OTP BANK
+Telefon: 0040212430273
+Cotă TVA: 19%
+FACTURĂ
+Document generat cu softul gratuit
+IceFact v1.1.119.2 (Windows/x86_64)
+Serie: MO
+Număr: 12
+Dată: 10-09-2020
+Cumpărător: OTP BANK
+Sediu: STR BUZESTI NR 66-68, BUCURESTI,
+Sector 1
+CIF: RO 7926069
+Nr.Reg.Com: J40/10296/1995
+Cont: RO72OTPV1000000000001760
+Bancă: OTP BANK
+
+Nr. Canti- Preţul unitar Valoarea Valoarea TVA
+Crt. Denumirea produselor sau a serviciilor U.M tatea (fără TVA) - LEI - - LEI -
+- LEI -
+1 HOBY CAFE - SEPTEMBRIE 2020 BUC 1.00 3968.07 3968.07 753.93
+2 C/VAL COMISION CNF CONTRACT BUC 1.00 119.33 119.33 22.67
+
+Termen de plată: 7 zile de la data facturării (scadenţa 17-09-2020).
+
+Semnătura şi ştampila
+furnizorului
+Document emis de:
+MONICA SANE
+Date privind expediţia
+Numele delegatului: ............................................................
+Buletinul / Cartea de identitate
+Seria .... nr ............ eliberat(ă) .....................................
+Mijlocul de transport ..................... nr .........................
+Expedierea s-a efectuat în prezenţa noastră la
+data de 10-09-2020 ora 09:21:34
+Semnăturile ............................................................................
+Total
+Semnătura de
+primire
+4087.40 776.60
+Total de plată
+4864.00 LEI
