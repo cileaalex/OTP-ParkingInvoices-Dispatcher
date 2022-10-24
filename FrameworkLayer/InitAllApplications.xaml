@@ -2,11 +2,12 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="out_dt_completeInvoices" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="out_dt_incompleteInvoices" Type="OutArgument(sd:DataTable)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1017,821</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>500,1344</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Initialization_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -70,12 +71,11 @@
       <AssemblyReference>UiPath.IntelligentOCR</AssemblyReference>
       <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="480,756" sap2010:WorkflowViewState.IdRef="Sequence_9">
+  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="480,1244" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -91,12 +91,16 @@
         <InArgument x:TypeArguments="sd:DataTable">[new DataTable]</InArgument>
       </Assign.Value>
     </Assign>
+    <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create folder struct for processed folder" sap:VirtualizedContainerService.HintSize="438,79" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),in_Config(&quot;procFolder&quot;).ToString,now.date.tostring(&quot;yyyy&quot;),now.date.ToString(&quot;MM&quot;),now.date.ToString(&quot;dd&quot;))]" />
+    <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create folder struct for out of scope folder" sap:VirtualizedContainerService.HintSize="438,79" sap2010:WorkflowViewState.IdRef="CreateDirectory_3" Path="[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),in_Config(&quot;outOfScopeFolder&quot;).ToString,now.date.tostring(&quot;yyyy&quot;),now.date.ToString(&quot;MM&quot;),now.date.ToString(&quot;dd&quot;))]" />
+    <ui:CreateDirectory ContinueOnError="{x:Null}" DisplayName="Create folder struct for unprocessed folder" sap:VirtualizedContainerService.HintSize="438,79" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" Path="[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),in_Config(&quot;unprocFolder&quot;).ToString,now.date.tostring(&quot;yyyy&quot;),now.date.ToString(&quot;MM&quot;),now.date.ToString(&quot;dd&quot;))]" />
     <TryCatch DisplayName="Try create output dt" sap:VirtualizedContainerService.HintSize="438,391" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xD;&#xA;'Add supplier and filename columns&#xD;&#xA;&#x9;io_dt_complete.Columns.Add(&quot;Supplier&quot;)&#xD;&#xA;&#x9;io_dt_complete.Columns.Add(&quot;FileName&quot;)&#xD;&#xA;'Add headers list &#xD;&#xA;&#x9;For Each listItem As String In in_Config(&quot;param&quot;).ToString.Split(&quot;|&quot;c)&#xD;&#xA;&#x9;&#x9;io_dt_complete.Columns.Add(listItem.Replace(&quot;_&quot;,&quot;&quot;))&#xD;&#xA;&#x9;Next&#xD;&#xA;&#x9;'Add rest of headers &#xD;&#xA;&#x9;io_dt_complete.columns.add(&quot;globalTVA&quot;)&#xD;&#xA;&#x9;io_dt_complete.Columns.Add(&quot;Servicii&quot;)&#xD;&#xA;&#x9;io_dt_complete.Columns.Add(&quot;Status&quot;)&#xD;&#xA;Catch ex As Exception&#xD;&#xA;&#x9;console.WriteLine(&quot;Table creation &quot; + ex.Message)&#xD;&#xA;&#x9;Throw &#xD;&#xA;End Try" DisplayName="Create complete invoice datatable" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+        <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xD;&#xA;io_dt_complete=addHeadersToDatatable(io_dt_complete,in_Config)&#xD;&#xA;io_dt_incompleteInvoices=io_dt_complete.Copy&#xD;&#xA;Catch ex As Exception&#xD;&#xA;&#x9;Console.WriteLine(ex.Message)&#xD;&#xA;&#x9;Throw ex&#xD;&#xA;end try&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;End Sub&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;Public Function addHeadersToDatatable(inputDatatable As DataTable, in_Config As Dictionary(Of String, Object)) As DataTable&#xD;&#xA;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;'Add supplier and filename columns&#xD;&#xA;&#x9; inputDatatable.Columns.Add(&quot;Supplier&quot;)&#xD;&#xA;&#x9; inputDatatable.Columns.Add(&quot;FileName&quot;)&#xD;&#xA;'Add headers list &#xD;&#xA;&#x9;For Each listItem As String In in_Config(&quot;param&quot;).ToString.Split(&quot;|&quot;c)&#xD;&#xA;&#x9;&#x9; inputDatatable.Columns.Add(listItem.Replace(&quot;_&quot;,&quot;&quot;))&#xD;&#xA;&#x9;Next&#xD;&#xA;&#x9;'Add rest of headers &#xD;&#xA;&#x9; inputDatatable.columns.add(&quot;globalTVA&quot;)&#xD;&#xA;&#x9; inputDatatable.Columns.Add(&quot;vendorId&quot;)&#xD;&#xA;&#x9; inputDatatable.Columns.Add(&quot;singularVendorId&quot;)&#xD;&#xA;&#x9; inputDatatable.Columns.Add(&quot;Servicii&quot;)&#xD;&#xA;&#x9; inputDatatable.Columns.Add(&quot;BarCode&quot;)&#xD;&#xA;&#x9; inputDatatable.Columns.Add(&quot;ClientCode&quot;)&#xD;&#xA;&#x9; inputDatatable.Columns.Add(&quot;SAPid&quot;)&#xD;&#xA;&#x9; inputDatatable.Columns.Add(&quot;Status&quot;)&#xD;&#xA;&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;&#x9;Return inputDatatable&#xD;&#xA;&#x9;End Function&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;Sub f()&#xD;&#xA;" DisplayName="Create complete and incomplete invoice datatable" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
           <ui:InvokeCode.Arguments>
             <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_complete">[out_dt_completeInvoices]</InOutArgument>
             <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+            <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_incompleteInvoices">[out_dt_incompleteInvoices]</InOutArgument>
           </ui:InvokeCode.Arguments>
         </ui:InvokeCode>
       </TryCatch.Try>
@@ -112,9 +116,11 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
+            <Throw Exception="[exception.InnerException]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
           </ActivityAction>
         </Catch>
       </TryCatch.Catches>
     </TryCatch>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="438,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;stop&quot;]" />
   </Sequence>
 </Activity>

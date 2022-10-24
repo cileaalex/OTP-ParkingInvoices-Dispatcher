@@ -1,0 +1,233 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="parseInvoice" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_supplier" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_pdfText" Type="InArgument(x:String)" />
+    <x:Property Name="in_TransactionItem" Type="InArgument(x:String)" />
+    <x:Property Name="io_invoiceRow" Type="InOutArgument(sd:DataRow)" />
+    <x:Property Name="in_readMethod" Type="InArgument(x:String)" />
+    <x:Property Name="io_dt_incompleteInvoices" Type="InOutArgument(sd:DataTable)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>500,1254</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>parseInvoice_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="29">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>CefSharp</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.Reflection</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="34">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.DocumentUnderstanding.ML.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR</AssemblyReference>
+      <AssemblyReference>UiPath.OmniPage.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>CefSharp</AssemblyReference>
+      <AssemblyReference>CefSharp.BrowserSubprocess.Core</AssemblyReference>
+      <AssemblyReference>CefSharp.Core</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="parseInvoice" sap:VirtualizedContainerService.HintSize="480,1114" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message Parse invoice" sap:VirtualizedContainerService.HintSize="438,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start parseInvoice issued by &quot;+in_supplier]" />
+    <TryCatch DisplayName="Try extract info from invoice" sap:VirtualizedContainerService.HintSize="438,891" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <Sequence DisplayName="Extracting invoice details" sap:VirtualizedContainerService.HintSize="376,664" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="&#x9;Try&#xD;&#xA;&#x9;io_invoiceRow(&quot;Supplier&quot;)=in_supplier&#xD;&#xA;&#x9;io_invoiceRow(&quot;globalTVA&quot;)=in_config(in_supplier+&quot;_globalTVA&quot;)&#xD;&#xA;&#x9;io_invoiceRow(&quot;singularVendorId&quot;)=in_config(in_supplier+&quot;_singularVendorId&quot;)&#xD;&#xA;&#x9;io_invoiceRow(&quot;ClientCode&quot;)=in_config(in_supplier+&quot;_ClientCode&quot;)&#xD;&#xA;&#x9;Console.WriteLine(Regex.Match(in_pdfText.ToLower,in_config(in_supplier+&quot;_ClientCode&quot;).ToString).Success.ToString)&#xD;&#xA;&#x9;If (in_config.ContainsKey(in_supplier+&quot;_ClientCode&quot;) AndAlso Regex.Match(in_pdfText.ToLower,in_config(in_supplier+&quot;_ClientCode&quot;).ToString).Success)&#xD;&#xA;&#x9;&#x9;io_invoiceRow(&quot;ClientCode&quot;)=Regex.Match(in_pdfText.ToLower,in_config(in_supplier+&quot;_ClientCode&quot;).ToString).Value&#xD;&#xA;&#x9;Console.WriteLine(&quot;Yes&quot;)&#x9;&#xD;&#xA;&#x9;Else&#xD;&#xA;&#x9;&#x9;&#x9;io_invoiceRow(&quot;ClientCode&quot;)=&quot;&quot;&#xD;&#xA;&#x9;&#x9;&#x9;Console.WriteLine(&quot;NO&quot;)&#x9;&#xD;&#xA;End If&#xD;&#xA;Catch ex As Exception&#xD;&#xA;&#x9;Console.WriteLine(&quot;supplier&quot; + ex.Message)&#xD;&#xA;&#x9;Throw ex&#xD;&#xA;&#x9;End Try" DisplayName="Add to invoice Row the supplier, filename, globalTVA, ClientCode if present" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+            <ui:InvokeCode.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_supplier">[in_supplier]</InArgument>
+              <InArgument x:TypeArguments="sd:DataRow" x:Key="io_invoiceRow">[io_invoiceRow]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_config">[in_Config]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_pdfText">[in_pdfText]</InArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xD;&#xA;Dim extractedVal As String&#xD;&#xA;Dim dateOfInvoice As Datetime &#xD;&#xA;Dim paramList As String()=Split(in_Config(&quot;param&quot;).ToString,&quot;|&quot;)&#xD;&#xA;For Each param As String In paramList&#xD;&#xA;io_pdfText=io_pdfText.ToLower&#xD;&#xA;&#xD;&#xA;&#x9;'supplier has param&#xD;&#xA;&#x9;If in_Config.ContainsKey(in_supplier+param)&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;&#x9;extractedVal = System.Text.RegularExpressions.regex.Match(io_pdfText.ToLower,in_Config(in_supplier+param).ToString).Value.Trim&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If(Not String.IsNullOrEmpty(extractedVal))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If (extractedVal.ToLower.contains(&quot;lei&quot;))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=&quot;RON&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If (param.contains(&quot;Valuta&quot;))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Dim valuta As Boolean&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;valuta=False&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;For Each currency As String In in_Config(&quot;currencies&quot;).ToString.Split(&quot;|&quot;c)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If (extractedVal.ToUpper.Contains(currency.ToUpper))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;valuta=True&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=currency&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end if&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Next&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If(valuta = False)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=&quot;RON&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End if&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If (param.Contains(&quot;TotalDePlata&quot;) Or param.Contains(&quot;ValoareTVA&quot;))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal= formatToDouble(extractedVal).ToString(&quot;F&quot;,CultureInfo.CreateSpecificCulture(&quot;fr-FR&quot;))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If (param.Contains(&quot;IBAN&quot;))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If (Regex.Match(extractedVal,in_Config(&quot;regexIbanIntern&quot;).ToString).Success)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=&quot;&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=extractedVal.Replace(&quot; &quot;,&quot;&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;'Formatting data to dd.MM.yyyy&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If (param.Contains(&quot;Data&quot;))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=extractedVal.Replace(&quot; &quot;,&quot;&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Dim ci As System.Globalization.CultureInfo = System.Globalization.CultureInfo.GetCultureInfo(&quot;ro-RO&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Dim formats() As String = {&quot;dd/MM/yyyy&quot;,&quot;M/d/yyyy&quot;,&quot;d/M/yyyy&quot;,&quot;M-d-yyyy&quot;,&quot;d-M-yyyy&quot;,&quot;d-MMM-yy&quot;,&quot;dd.MM.yyyy&quot;,&quot;MM.dd.yyyy&quot;,&quot;yyyy/MM/dd&quot;,&quot;dd MMM yyyy&quot;,&quot;yy/MM/dd&quot;,&quot;yy.MM.dd&quot;,&quot;yy-MM-dd&quot;,&quot;YY/bM/bd&quot;,&quot;bM/bD/YY&quot;,&quot;bD/bM/YY&quot;,&quot;Mon-dd-yyyy&quot;,&quot;DD-Mon-yyyy&quot;,&quot;D Month, Yr&quot;,&quot;yyyy.MM.dd, dd MMMM yyyy&quot;,&quot;yyyy.MM.dd&quot;}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Dim dateValue As datetime &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Console.WriteLine(extractedVal + &quot; 1&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If (param.tolower.Contains(&quot;factura&quot;))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If(datetime.TryParseExact(extractedVal, formats, System.Globalization.CultureInfo.InvariantCulture,system.Globalization.DateTimeStyles.None,dateValue))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=dateValue.ToString(&quot;dd.MM.yyyy&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;dateOfInvoice = dateValue&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If (datetime.TryParseExact(extractedVal,&quot;ddMMMMyyyy&quot;,ci,System.Globalization.DateTimeStyles.None,dateValue) Or datetime.TryParseExact(extractedVal,&quot;dMMMMyyyy&quot;,ci,System.Globalization.DateTimeStyles.None,dateValue))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=dateValue.ToString(&quot;dd.MM.yyyy&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;dateOfInvoice = dateValue&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Console.WriteLine(dateOfInvoice.ToString+&quot; 2&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Else &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=&quot;&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If(datetime.TryParseExact(extractedVal, formats, System.Globalization.CultureInfo.InvariantCulture,system.Globalization.DateTimeStyles.None,dateValue))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=dateValue.ToString(&quot;dd.MM.yyyy&quot;)&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If(String.IsNullOrEmpty(dateOfInvoice.ToString) And String.IsNullOrEmpty(extractedVal))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=&quot;&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If((Not String.IsNullOrEmpty(extractedVal) And datetime.TryParseExact(extractedVal,&quot;dd MMMM yyyy&quot;,ci,System.Globalization.DateTimeStyles.None,dateValue))Or(Not String.IsNullOrEmpty(extractedVal) And datetime.TryParseExact(extractedVal,&quot;d MMMM yyyy&quot;,ci,System.Globalization.DateTimeStyles.None,dateValue)))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal = dateValue.ToString(&quot;dd.MM.yyyy&quot;)&#x9;&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;If(Not String.IsNullOrEmpty(extractedVal))&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=dateOfInvoice.AddDays(CInt(regex.Match(extractedVal,&quot;\d+&quot;).Value)).ToString(&quot;dd.MM.yyyy&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;&#x9;'supplier does not have param&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;Else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;extractedVal=&quot;&quot;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;End If&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;'console.Out.WriteLine(in_supplier+param+&quot;        &quot;+ extractedVal.ToUpper)&#xD;&#xA;&#x9;&#x9;'add extracted val to datarow&#xD;&#xA;&#x9;&#x9;io_invoiceRow(param.Replace(&quot;_&quot;,&quot;&quot;))=extractedVal.ToUpper&#xD;&#xA;&#x9;&#x9;io_pdfText=io_pdfText.ToLower&#xD;&#xA;&#x9;&#x9;&#xD;&#xA;Next&#xD;&#xA;Catch e As Exception&#xD;&#xA;&#x9;console.WriteLine(e.Message)&#xD;&#xA;&#x9;Throw e&#xD;&#xA;End Try&#xD;&#xA;End Sub &#xD;&#xA;&#xD;&#xA;Private Function formatToDouble(stringToBeProcessed As String) As Double&#xD;&#xA;&#x9;Console.writeline(stringToBeProcessed)&#xD;&#xA;    Dim valueAsString As String = StringToBeProcessed.Replace(&quot; &quot;, &quot;&quot;).Trim()&#xD;&#xA;   &#xD;&#xA;    Dim integerPart As String = Regex.Match(valueAsString, &quot;(\d+\W?)+(?=\W\d{2}$)&quot;).Value&#xD;&#xA;    integerPart = Regex.Replace(integerPart, &quot;\W&quot;, &quot;&quot;)&#xD;&#xA;    Dim decimalPart As String = Regex.Match(valueAsString, &quot;\d{2}$&quot;).Value&#xD;&#xA;  &#x9;If (String.IsNullOrEmpty(decimalPart))&#xD;&#xA;&#x9;&#x9;decimalPart=&quot;00&quot;&#xD;&#xA;&#x9;end if&#xD;&#xA;    If StringToBeProcessed.Contains(&quot;-&quot;) Then&#xD;&#xA;        valueAsString = &quot;-&quot; &amp; integerPart &amp; &quot;.&quot; &amp; decimalPart&#xD;&#xA;    Else&#xD;&#xA;        valueAsString = integerPart &amp; &quot;.&quot; &amp; decimalPart&#xD;&#xA;    End If&#xD;&#xA;&#xD;&#xA;    Dim valueAsDbl As Double = Convert.ToDouble((valueAsString.Trim.Replace(&quot; &quot;,&quot;&quot;)))&#xD;&#xA;    &#xD;&#xA;&#x9;Return valueAsDbl&#xD;&#xA;End Function&#xD;&#xA;&#xD;&#xA;Sub F()" DisplayName="Add CIF, IBAN, InvoiceNo, InvoiceDate, Currency, etc" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+            <ui:InvokeCode.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_supplier">[in_supplier]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="io_pdfText">[in_pdfText]</InOutArgument>
+              <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_invoiceRow">[io_invoiceRow]</InOutArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xD;&#xA;Dim extractedVal As String&#xD;&#xA;Dim param As String &#xD;&#xA;param = in_Config(&quot;paramServicii&quot;).ToString&#xD;&#xA;&#xD;&#xA;io_pdfText=Regex.Replace(io_pdfText,&quot;\r\n&quot;,in_Config(&quot;newLineReplace&quot;).ToString)&#xD;&#xA;'Console.WriteLine(io_pdfText)&#xD;&#xA;&#xD;&#xA;Dim tableText1 As String&#xD;&#xA;&#xD;&#xA;tableText1=Regex.match(io_pdfText,in_Config(in_supplier+in_Config(&quot;tableText&quot;).ToString+in_read).ToString).Value&#xD;&#xA;tableText1=Regex.Replace(tableText1,in_Config(&quot;newLineReplace&quot;).ToString,Environment.NewLine).Trim&#xD;&#xA;&#xD;&#xA;If (Not String.IsNullOrEmpty(tableText1))&#xD;&#xA;&#x9;For Each Match As Match  In Regex.Matches(tableText1,in_Config(in_supplier+in_Config(&quot;paramServicii&quot;).ToString+in_read).ToString)&#xD;&#xA;&#x9;&#x9;If(Not String.IsNullOrEmpty(Match.ToString))&#xD;&#xA;&#x9;&#x9;&#x9;io_invoiceRow(&quot;Servicii&quot;)=io_invoiceRow(&quot;Servicii&quot;).ToString+vbNewLine + Match.ToString&#xD;&#xA;&#x9;&#x9;&#x9;Console.WriteLine(Match.ToString)&#x9;&#xD;&#xA;&#x9;&#x9;Else&#xD;&#xA;&#x9;&#x9;&#x9;Console.WriteLine(Match.ToString + &quot;!!!!!!!!!!!!!!!!!!!!&quot;)&#xD;&#xA;&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;End If&#xD;&#xA;&#x9;Next&#xD;&#xA;Else &#xD;&#xA;&#x9;io_invoiceRow(&quot;Servicii&quot;)=&quot;&quot;&#xD;&#xA;End If&#xD;&#xA;&#xD;&#xA;Catch e As Exception&#xD;&#xA;&#x9;console.WriteLine(&quot;Invoice services threw &quot; + e.Message)&#xD;&#xA;&#x9;Throw e&#xD;&#xA;End Try&#xD;&#xA;" DisplayName="Add Servicii" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_3">
+            <ui:InvokeCode.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_supplier">[in_supplier]</InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="io_pdfText">[in_pdfText]</InOutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_read">[in_readMethod]</InArgument>
+              <InOutArgument x:TypeArguments="sd:DataRow" x:Key="io_invoiceRow">[io_invoiceRow]</InOutArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Parse Invoice Exception" sap:VirtualizedContainerService.HintSize="476,910" sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="sd:DataRow" Name="invoiceRowIncomplete" />
+                <Variable x:TypeArguments="x:String" Name="barcode" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="New incomplete row" sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="sd:DataRow">[invoiceRowIncomplete]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="sd:DataRow">[io_dt_incompleteInvoices.NewRow()]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ApplyBarCode workflow" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="BusinessLayer\ApplyBarCode.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="TransactionData">[in_TransactionItem]</InOutArgument>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config">[in_Config]</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="out_barcode">[barcode]</OutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="434,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                <ui:MultipleAssign.AssignOperations>
+                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                      <ui:AssignOperation.To>
+                        <OutArgument x:TypeArguments="x:Object">[io_invoiceRow("BarCode")]</OutArgument>
+                      </ui:AssignOperation.To>
+                      <ui:AssignOperation.Value>
+                        <InArgument x:TypeArguments="x:Object">[barcode]</InArgument>
+                      </ui:AssignOperation.Value>
+                    </ui:AssignOperation>
+                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                      <ui:AssignOperation.To>
+                        <OutArgument x:TypeArguments="x:Object">[io_invoiceRow("FileName")]</OutArgument>
+                      </ui:AssignOperation.To>
+                      <ui:AssignOperation.Value>
+                        <InArgument x:TypeArguments="x:Object">[PATH.GetFileName(in_TransactionItem)]</InArgument>
+                      </ui:AssignOperation.Value>
+                    </ui:AssignOperation>
+                  </scg:List>
+                </ui:MultipleAssign.AssignOperations>
+              </ui:MultipleAssign>
+              <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="Assign incomplete row values" sap:VirtualizedContainerService.HintSize="434,184" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_Config(&quot;headersList&quot;).ToString.Replace(&quot;_&quot;,&quot;&quot;).Split(&quot;|&quot;c)]">
+                <ui:ForEach.Body>
+                  <ActivityAction x:TypeArguments="x:String">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+                    </ActivityAction.Argument>
+                    <Assign DisplayName="Copy row" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[invoiceRowIncomplete(item)]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">[io_invoiceRow(item)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </ActivityAction>
+                </ui:ForEach.Body>
+              </ui:ForEach>
+              <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[invoiceRowIncomplete]" DataTable="[io_dt_incompleteInvoices]" DisplayName="Add invoice row to output dt" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:AddDataRow>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke MoveIncorrectFile workflow" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="DataLayer\MoveIncorrectFile.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_to">[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),in_Config("unprocFolder").ToString,now.date.tostring("yyyy"),now.date.ToString("MM"),now.date.ToString("dd"),in_TransactionItem.Split("\"c)(in_TransactionItem.split("\"c).Length-1))]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_from">[in_TransactionItem]</InArgument>
+                  <InArgument x:TypeArguments="s:Exception" x:Key="in_BRE">[exception.InnerException]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>
