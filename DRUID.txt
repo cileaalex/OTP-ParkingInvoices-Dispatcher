@@ -1,0 +1,42 @@
+druid s.a. factură fiscală
+romania, prahova număr: drd 2634
+ploieşti, bld. republicii, nr.14, bl.33b1, et.7, ap.23 dată: 12/10/2022
+cif: ro38909947 scadență: 02/11/2022
+reg.com: j29/2089/2020 monedă factură: ron
+capital social: 704,314 ron monedă referință: eur
+iban: eur - ro55btrleurcrt0435316501 - banca transilvania curs: 4.9367 ron
+swift (btrlro22) modalitate de plată: transfer bancar
+eur - ro03rzbr0000060020035107 - raiffeisen bank sa
+swift (rzbrrobu)
+gbp - ro13btrlgbpcrt0435316501 - banca transilvania
+swift (btrlro22)
+ron - ro41rzbr0000060020035102 - raiffeisen bank sa
+usd - ro59btrlusdcrt0435316501 - banca transilvania
+swift (btrlro22)
+ron - ro78btrlroncrt0435316502 - banca transilvania
+
+client: otp bank romania sa
+romania, bucuresti, sector 1, str. buzesti, nr.66-68
+cif: ro7926069
+reg.com: j40/10296/1995
+
+# articol um cant. pret unitar valoare %tva val. tva total
+descriere
+1 abonament lunar buc 1.00 1,000.00 1,000.00 19 190.00 1,190.00
+octombie 2022 - chatbot amanare rate conf. ctr.
+nr. 13953/30.04.2020 - 1000 eur/luna
+2 abonament lunar buc 1.00 300.00 300.00 19 57.00 357.00
+octombie 2022 - chatbot faq conf. ctr. nr.
+13953/30.04.2020 - 300 eur/luna
+total fără tva: 1,300.00 eur
+6,417.71 ron
+total tva: 247.00 eur
+1,219.36 ron
+total valoare: 1,547.00 eur
+7,637.07 ron
+
+valentin negru
+4,9367
+
+factura circulă fără semnătură și ștampilă, conform codului fiscal art. 319, alin.29.
+www.keez.ro 1 / 1

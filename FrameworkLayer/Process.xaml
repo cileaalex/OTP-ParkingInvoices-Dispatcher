@@ -8,7 +8,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>680,5355</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1234,5981</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="60">
@@ -79,7 +79,7 @@
       <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="660,5295" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="562,5916" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="supplier" />
       <Variable x:TypeArguments="x:String" Name="pdfText" />
@@ -96,8 +96,8 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log message started processing" sap:VirtualizedContainerService.HintSize="618,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start process for &quot;+in_TransactionItem]" />
-    <If Condition="[not System.text.RegularExpressions.regex.match(path.GetExtension(in_TransactionItem),&quot;(?i)pdf&quot;).success]" DisplayName="If extension not pdf" sap:VirtualizedContainerService.HintSize="618,51" sap2010:WorkflowViewState.IdRef="If_1">
+    <ui:LogMessage DisplayName="Log message started processing" sap:VirtualizedContainerService.HintSize="520,101" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Start process for &quot;+in_TransactionItem]" />
+    <If Condition="[not System.text.RegularExpressions.regex.match(path.GetExtension(in_TransactionItem),&quot;(?i)pdf&quot;).success]" DisplayName="If extension not pdf" sap:VirtualizedContainerService.HintSize="520,61" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -114,7 +114,7 @@
         </ui:InvokeWorkflowFile>
       </If.Then>
     </If>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke determineSupplier workflow" sap:VirtualizedContainerService.HintSize="618,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="DataLayer\determineSupplier.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke determineSupplier workflow" sap:VirtualizedContainerService.HintSize="520,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="DataLayer\determineSupplier.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
         <OutArgument x:TypeArguments="x:String" x:Key="out_supplier">[supplier]</OutArgument>
@@ -123,8 +123,8 @@
         <OutArgument x:TypeArguments="x:String" x:Key="out_readMethod">[readMethod]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:WriteTextFile DisplayName="Write Text File" FileName="[supplier+&quot;.txt&quot;]" sap:VirtualizedContainerService.HintSize="618,132" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[pdfText]" />
-    <Assign DisplayName="Create new Invoice Row" sap:VirtualizedContainerService.HintSize="618,60" sap2010:WorkflowViewState.IdRef="Assign_14">
+    <ui:WriteTextFile DisplayName="Write Text File" FileName="[supplier+&quot;.txt&quot;]" sap:VirtualizedContainerService.HintSize="520,142" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[pdfText.ToLower]" />
+    <Assign DisplayName="Create new Invoice Row" sap:VirtualizedContainerService.HintSize="520,70" sap2010:WorkflowViewState.IdRef="Assign_14">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataRow">[invoiceRow]</OutArgument>
       </Assign.To>
@@ -132,7 +132,7 @@
         <InArgument x:TypeArguments="sd:DataRow">[io_dt_completeInvoices.NewRow()]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="New incomplete row" sap:VirtualizedContainerService.HintSize="618,60" sap2010:WorkflowViewState.IdRef="Assign_15">
+    <Assign DisplayName="New incomplete row" sap:VirtualizedContainerService.HintSize="520,70" sap2010:WorkflowViewState.IdRef="Assign_15">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataRow">[invoiceRowIncomplete]</OutArgument>
       </Assign.To>
@@ -140,7 +140,7 @@
         <InArgument x:TypeArguments="sd:DataRow">[io_dt_incompleteInvoices.NewRow()]</InArgument>
       </Assign.Value>
     </Assign>
-    <If Condition="[string.IsNullOrWhiteSpace(supplier)]" DisplayName="If supplier not identified" sap:VirtualizedContainerService.HintSize="618,214" sap2010:WorkflowViewState.IdRef="If_2">
+    <If Condition="[string.IsNullOrWhiteSpace(supplier)]" DisplayName="If supplier not identified" sap:VirtualizedContainerService.HintSize="520,277" sap2010:WorkflowViewState.IdRef="If_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -148,7 +148,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence DisplayName="Unknown supplier" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <Sequence DisplayName="Unknown supplier" sap:VirtualizedContainerService.HintSize="400,80" sap2010:WorkflowViewState.IdRef="Sequence_3">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -202,7 +202,7 @@
         </Sequence>
       </If.Then>
     </If>
-    <Assign DisplayName="Add supplier" sap:VirtualizedContainerService.HintSize="618,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign DisplayName="Add supplier" sap:VirtualizedContainerService.HintSize="520,70" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Object">[invoiceRow("Supplier")]</OutArgument>
       </Assign.To>
@@ -210,7 +210,7 @@
         <InArgument x:TypeArguments="x:Object">[supplier]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke parseInvoice workflow" sap:VirtualizedContainerService.HintSize="618,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="DataLayer\parseInvoice.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke parseInvoice workflow" sap:VirtualizedContainerService.HintSize="520,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="DataLayer\parseInvoice.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_supplier">[supplier]</InArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
@@ -221,9 +221,9 @@
         <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_incompleteInvoices">[io_dt_incompleteInvoices]</InOutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <If Condition="[not String.IsNullOrEmpty(invoiceRow(&quot;NumarFactura&quot;).ToString)]" DisplayName="If invoice has Invoice Number" sap:VirtualizedContainerService.HintSize="618,214" sap2010:WorkflowViewState.IdRef="If_10">
+    <If Condition="[not String.IsNullOrEmpty(invoiceRow(&quot;NumarFactura&quot;).ToString)]" DisplayName="If invoice has Invoice Number" sap:VirtualizedContainerService.HintSize="520,277" sap2010:WorkflowViewState.IdRef="If_10">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_14">
+        <Sequence sap:VirtualizedContainerService.HintSize="400,80" sap2010:WorkflowViewState.IdRef="Sequence_14">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -256,15 +256,15 @@
         </Sequence>
       </If.Then>
     </If>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="618,51" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="520,61" sap2010:WorkflowViewState.IdRef="CommentOut_1">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="518,158" sap2010:WorkflowViewState.IdRef="Sequence_8">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="538,965" sap2010:WorkflowViewState.IdRef="Sequence_8">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Scanned Invoice " sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Scanned Invoice " sap:VirtualizedContainerService.HintSize="400,90" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -342,7 +342,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:CommentOut>
-    <If Condition="[readMethod.Contains(&quot;page&quot;)]" DisplayName="If reading method is OCR" sap:VirtualizedContainerService.HintSize="618,51" sap2010:WorkflowViewState.IdRef="If_5">
+    <If Condition="[readMethod.Contains(&quot;page&quot;)]" DisplayName="If reading method is OCR" sap:VirtualizedContainerService.HintSize="520,61" sap2010:WorkflowViewState.IdRef="If_5">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -362,7 +362,7 @@
         </ui:InvokeWorkflowFile>
       </If.Then>
     </If>
-    <If Condition="[not String.IsNullOrEmpty(invoiceRow(&quot;CotaTVA&quot;).ToString)]" DisplayName="If VAT Rate is present" sap:VirtualizedContainerService.HintSize="618,208" sap2010:WorkflowViewState.IdRef="If_4">
+    <If Condition="[not String.IsNullOrEmpty(invoiceRow(&quot;CotaTVA&quot;).ToString)]" DisplayName="If VAT Rate is present" sap:VirtualizedContainerService.HintSize="520,267" sap2010:WorkflowViewState.IdRef="If_4">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -370,7 +370,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Assign DisplayName="Remove valoare tva from mandatory fields" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+        <Assign DisplayName="Remove valoare tva from mandatory fields" sap:VirtualizedContainerService.HintSize="262,70" sap2010:WorkflowViewState.IdRef="Assign_8">
           <Assign.To>
             <OutArgument x:TypeArguments="x:Object">[in_Config("mandatoryFields")]</OutArgument>
           </Assign.To>
@@ -380,9 +380,9 @@
         </Assign>
       </If.Then>
     </If>
-    <If Condition="[not invoiceRow(&quot;Valuta&quot;).ToString.Contains(&quot;RON&quot;)]" DisplayName="If Currency is not RON" sap:VirtualizedContainerService.HintSize="618,208" sap2010:WorkflowViewState.IdRef="If_11">
+    <If Condition="[not invoiceRow(&quot;Valuta&quot;).ToString.Contains(&quot;RON&quot;)]" DisplayName="If Currency is not RON" sap:VirtualizedContainerService.HintSize="520,267" sap2010:WorkflowViewState.IdRef="If_11">
       <If.Then>
-        <Assign DisplayName="Remove valoare tva from mandatory fields" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_18">
+        <Assign DisplayName="Remove valoare tva from mandatory fields" sap:VirtualizedContainerService.HintSize="262,70" sap2010:WorkflowViewState.IdRef="Assign_18">
           <Assign.To>
             <OutArgument x:TypeArguments="x:Object">[in_Config("mandatoryFields")]</OutArgument>
           </Assign.To>
@@ -392,7 +392,7 @@
         </Assign>
       </If.Then>
     </If>
-    <Assign DisplayName="Create param list" sap:VirtualizedContainerService.HintSize="618,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign DisplayName="Create param list" sap:VirtualizedContainerService.HintSize="520,70" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="s:String[]">[paramList]</OutArgument>
       </Assign.To>
@@ -400,15 +400,15 @@
         <InArgument x:TypeArguments="s:String[]">[in_Config("mandatoryFields").ToString.Replace("_","").Split("|"c)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="618,236" sap2010:WorkflowViewState.IdRef="CommentOut_5">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="520,268" sap2010:WorkflowViewState.IdRef="CommentOut_5">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,158" sap2010:WorkflowViewState.IdRef="Sequence_13">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="442,180" sap2010:WorkflowViewState.IdRef="Sequence_13">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Not RO CUI" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_9">
+          <Sequence DisplayName="Not RO CUI" sap:VirtualizedContainerService.HintSize="400,90" sap2010:WorkflowViewState.IdRef="Sequence_9">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -480,7 +480,7 @@
         </Sequence>
       </ui:CommentOut.Body>
     </ui:CommentOut>
-    <If Condition="[Regex.Match(invoiceRow(&quot;CIF&quot;).ToString,&quot;[A-Za-z]&quot;).Success andalso not Regex.Match(invoiceRow(&quot;CIF&quot;).ToString,&quot;RO|ro|R0|r0&quot;).Success]" DisplayName="If CUI is extern" sap:VirtualizedContainerService.HintSize="618,51" sap2010:WorkflowViewState.IdRef="If_6">
+    <If Condition="[Regex.Match(invoiceRow(&quot;CIF&quot;).ToString,&quot;[A-Za-z]&quot;).Success andalso not Regex.Match(invoiceRow(&quot;CIF&quot;).ToString,&quot;RO|ro|R0|r0&quot;).Success]" DisplayName="If CUI is extern" sap:VirtualizedContainerService.HintSize="520,61" sap2010:WorkflowViewState.IdRef="If_6">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -500,7 +500,7 @@
         </ui:InvokeWorkflowFile>
       </If.Then>
     </If>
-    <If Condition="[Regex.Match(invoiceRow(&quot;IBAN&quot;).ToString.ToUpper,&quot;TREZ&quot;).Success]" DisplayName="If IBAN contains TREZ" sap:VirtualizedContainerService.HintSize="618,51" sap2010:WorkflowViewState.IdRef="If_9">
+    <If Condition="[Regex.Match(invoiceRow(&quot;IBAN&quot;).ToString.ToUpper,&quot;TREZ&quot;).Success]" DisplayName="If IBAN contains TREZ" sap:VirtualizedContainerService.HintSize="520,61" sap2010:WorkflowViewState.IdRef="If_9">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -520,9 +520,9 @@
         </ui:InvokeWorkflowFile>
       </If.Then>
     </If>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="618,236" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="520,244" sap2010:WorkflowViewState.IdRef="CommentOut_2">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,158" sap2010:WorkflowViewState.IdRef="Sequence_10">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,156" sap2010:WorkflowViewState.IdRef="Sequence_10">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -600,7 +600,7 @@
         </Sequence>
       </ui:CommentOut.Body>
     </ui:CommentOut>
-    <If Condition="[not invoiceRow(&quot;singularVendorId&quot;).ToString.ToLower.Contains(&quot;true&quot;)]" DisplayName="If not singular vendor id" sap:VirtualizedContainerService.HintSize="618,51" sap2010:WorkflowViewState.IdRef="If_8">
+    <If Condition="[not invoiceRow(&quot;singularVendorId&quot;).ToString.ToLower.Contains(&quot;true&quot;)]" DisplayName="If not singular vendor id" sap:VirtualizedContainerService.HintSize="520,61" sap2010:WorkflowViewState.IdRef="If_8">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -620,15 +620,15 @@
         </ui:InvokeWorkflowFile>
       </If.Then>
     </If>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="618,236" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="520,268" sap2010:WorkflowViewState.IdRef="CommentOut_3">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,158" sap2010:WorkflowViewState.IdRef="Sequence_11">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="442,180" sap2010:WorkflowViewState.IdRef="Sequence_11">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Missing item" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Missing item" sap:VirtualizedContainerService.HintSize="400,90" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -700,13 +700,13 @@
         </Sequence>
       </ui:CommentOut.Body>
     </ui:CommentOut>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="Check for missing fields" sap:VirtualizedContainerService.HintSize="618,384" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[paramList]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="Check for missing fields" sap:VirtualizedContainerService.HintSize="520,453" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[paramList]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:String" Name="item" />
           </ActivityAction.Argument>
-          <If Condition="[String.IsNullOrWhiteSpace(invoiceRow(item).ToString)]" DisplayName="If missing item found, throw proceedManually BRE" sap:VirtualizedContainerService.HintSize="484,260" sap2010:WorkflowViewState.IdRef="If_3">
+          <If Condition="[String.IsNullOrWhiteSpace(invoiceRow(item).ToString)]" DisplayName="If missing item found, throw proceedManually BRE" sap:VirtualizedContainerService.HintSize="484,319" sap2010:WorkflowViewState.IdRef="If_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -714,7 +714,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <If.Then>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke moveFileToIncomplete workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_25" UnSafe="False" WorkflowFileName="DataLayer\moveFileToIncomplete.xaml">
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke moveFileToIncomplete workflow" sap:VirtualizedContainerService.HintSize="334,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_25" UnSafe="False" WorkflowFileName="DataLayer\moveFileToIncomplete.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
                   <InArgument x:TypeArguments="sd:DataRow" x:Key="invoiceRow">[invoiceRow]</InArgument>
                   <InArgument x:TypeArguments="x:String" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
@@ -735,7 +735,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim invoiceDate As Datetime&#xD;&#xA;invoiceDate = datetime.ParseExact(s(&quot;DataFactura&quot;).ToString,&quot;dd.MM.yyyy&quot;,CultureInfo.InvariantCulture)&#xD;&#xA;If invoiceDate.Year &gt; Datetime.now.Year Then&#xD;&#xA;&#x9;Console.WriteLine(invoiceDate.Year )&#xD;&#xA;&#x9;If datetime.now.Month = 1  AndAlso invoiceDate.Month = 12 Then&#xD;&#xA;&#x9;&#x9;correctDate = True&#xD;&#xA;&#x9;&#x9;Else&#xD;&#xA;&#x9;&#x9;&#x9;correctDate = False&#xD;&#xA;&#x9;&#x9;End If&#xD;&#xA;&#x9;&#x9;Else&#xD;&#xA;&#x9;&#x9;&#x9;correctDate = True&#xD;&#xA;End If" DisplayName="dETERMINE IF DATE IS CORRECT" sap:VirtualizedContainerService.HintSize="618,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim invoiceDate As Datetime&#xA;invoiceDate = datetime.ParseExact(s(&quot;DataFactura&quot;).ToString,&quot;dd.MM.yyyy&quot;,CultureInfo.InvariantCulture)&#xA;If invoiceDate.Year &gt; Datetime.now.Year Then&#xA;&#x9;Console.WriteLine(invoiceDate.Year )&#xA;&#x9;If datetime.now.Month = 1  AndAlso invoiceDate.Month = 12 Then&#xA;&#x9;&#x9;correctDate = True&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;correctDate = False&#xA;&#x9;&#x9;End If&#xA;&#x9;&#x9;Else&#xA;&#x9;&#x9;&#x9;correctDate = True&#xA;End If" DisplayName="dETERMINE IF DATE IS CORRECT" sap:VirtualizedContainerService.HintSize="520,174" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <InArgument x:TypeArguments="sd:DataRow" x:Key="s">[invoiceRow]</InArgument>
         <InOutArgument x:TypeArguments="x:Boolean" x:Key="correctDate">[correctDate]</InOutArgument>
@@ -747,15 +747,15 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeCode>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="618,236" sap2010:WorkflowViewState.IdRef="CommentOut_4">
+    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="520,268" sap2010:WorkflowViewState.IdRef="CommentOut_4">
       <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="242,158" sap2010:WorkflowViewState.IdRef="Sequence_12">
+        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="442,180" sap2010:WorkflowViewState.IdRef="Sequence_12">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Incorrecrt Date" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <Sequence DisplayName="Incorrecrt Date" sap:VirtualizedContainerService.HintSize="400,90" sap2010:WorkflowViewState.IdRef="Sequence_6">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -827,7 +827,7 @@
         </Sequence>
       </ui:CommentOut.Body>
     </ui:CommentOut>
-    <If Condition="[correctDate = False]" DisplayName="If incorrect date" sap:VirtualizedContainerService.HintSize="618,260" sap2010:WorkflowViewState.IdRef="If_7">
+    <If Condition="[correctDate = False]" DisplayName="If incorrect date" sap:VirtualizedContainerService.HintSize="520,319" sap2010:WorkflowViewState.IdRef="If_7">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -835,7 +835,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke moveFileToIncomplete workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="DataLayer\moveFileToIncomplete.xaml">
+        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke moveFileToIncomplete workflow" sap:VirtualizedContainerService.HintSize="334,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_19" UnSafe="False" WorkflowFileName="DataLayer\moveFileToIncomplete.xaml">
           <ui:InvokeWorkflowFile.Arguments>
             <InArgument x:TypeArguments="sd:DataRow" x:Key="invoiceRow">[invoiceRow]</InArgument>
             <InArgument x:TypeArguments="x:String" x:Key="in_TransactionItem">[in_TransactionItem]</InArgument>
@@ -847,14 +847,14 @@
         </ui:InvokeWorkflowFile>
       </If.Then>
     </If>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ApplyBarCode workflow" sap:VirtualizedContainerService.HintSize="618,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="BusinessLayer\ApplyBarCode.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ApplyBarCode workflow" sap:VirtualizedContainerService.HintSize="520,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_10" UnSafe="False" WorkflowFileName="BusinessLayer\ApplyBarCode.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <InOutArgument x:TypeArguments="x:String" x:Key="TransactionData">[in_TransactionItem]</InOutArgument>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config">[in_Config]</InArgument>
         <OutArgument x:TypeArguments="x:String" x:Key="out_barcode">[barcode]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:MultipleAssign DisplayName="Assign barcode, filename success" sap:VirtualizedContainerService.HintSize="618,131" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+    <ui:MultipleAssign DisplayName="Assign barcode, filename success" sap:VirtualizedContainerService.HintSize="520,141" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
       <ui:MultipleAssign.AssignOperations>
         <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -876,7 +876,7 @@
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[invoiceRow]" DataTable="[io_dt_completeInvoices]" DisplayName="Add invoice row to output dt" sap:VirtualizedContainerService.HintSize="618,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
+    <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[invoiceRow]" DataTable="[io_dt_completeInvoices]" DisplayName="Add invoice row to output dt" sap:VirtualizedContainerService.HintSize="520,61" sap2010:WorkflowViewState.IdRef="AddDataRow_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -884,7 +884,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:AddDataRow>
-    <ui:MoveFile ContinueOnError="{x:Null}" Destination="[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),in_Config(&quot;procFolder&quot;).ToString,now.date.tostring(&quot;yyyy&quot;),now.date.ToString(&quot;MM&quot;),now.date.ToString(&quot;dd&quot;),in_TransactionItem.Split(&quot;\&quot;c)(in_TransactionItem.split(&quot;\&quot;c).Length-1))]" DisplayName="Move file to processed" sap:VirtualizedContainerService.HintSize="618,157" sap2010:WorkflowViewState.IdRef="MoveFile_4" Overwrite="True" Path="[in_TransactionItem]">
+    <ui:MoveFile ContinueOnError="{x:Null}" Destination="[Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),in_Config(&quot;procFolder&quot;).ToString,now.date.tostring(&quot;yyyy&quot;),now.date.ToString(&quot;MM&quot;),now.date.ToString(&quot;dd&quot;),in_TransactionItem.Split(&quot;\&quot;c)(in_TransactionItem.split(&quot;\&quot;c).Length-1))]" DisplayName="Move file to processed" sap:VirtualizedContainerService.HintSize="520,167" sap2010:WorkflowViewState.IdRef="MoveFile_4" Overwrite="True" Path="[in_TransactionItem]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>

@@ -1,6 +1,7 @@
 .local
 .settings
 .debug
+.entities
 .screenshots
 .tmh
 Exception_Screenshots
